@@ -17,7 +17,7 @@ if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
     <meta name="author" content="">
     <link rel="icon" href="http://localhost/food/img/favicon.ico">
 
-    <title> Food Decider</title>
+    <title> Recepie  | Food Decider</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://localhost/food/css/bootstrap.min.css" rel="stylesheet">

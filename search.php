@@ -1,6 +1,38 @@
 
+<?php
+  $conn = mysqli_connect("localhost", "root", "", "food");  
 
+  $keyword = "";  
+  $queryCondition = "";
+  if(!empty($_POST["keyword"])) {
+    $keyword = $_POST["keyword"];
+    $wordsAry = explode(" ", $keyword);
+    $wordsCount = count($wordsAry);
+    $queryCondition = " WHERE ";
+    for($i=0;$i<$wordsCount;$i++) {
+      $queryCondition .= "recepie_name LIKE '%" . $wordsAry[$i] . "%' OR recepie_desc LIKE '%" . $wordsAry[$i] . "%'";
+      if($i!=$wordsCount-1) {
+        $queryCondition .= " OR ";
+      }
+    }
+  }
+  $orderby = " ORDER BY recepie_id desc"; 
+  $sql = "SELECT * FROM recepie " . $queryCondition;
+  $result = mysqli_query($conn,$sql); 
+?>
+<?php 
+  function highlightKeywords($text, $keyword) {
+    $wordsAry = explode(" ", $keyword);
+    $wordsCount = count($wordsAry);
+    
+    for($i=0;$i<$wordsCount;$i++) {
+      $highlighted_text = "<span style='font-weight:bold;'>$wordsAry[$i]</span>";
+      $text = str_ireplace($wordsAry[$i], $highlighted_text, $text);
+    }
 
+    return $text;
+  }
+?>
 
 <!doctype html>
 <html lang="en">
@@ -32,61 +64,36 @@
         <h3> sddsa</h3>
       </div>
 
-      <form >
+      <form name="frmSearch" method="post" action="">
+       <div class="form-group">
+          <label for="exampleInputhrname"> Search  Recepie</label>
+          <input type="text" name="keyword" value="<?php echo $keyword; ?>" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Enter Search Keyword">
+          <br/>
+           <input type="submit" name="go" class="btn btn-primary pull-right" value="Search">
 
-        <label> Search Recepie</label>
-        <input type="text" name="name" class="form-control" value="">
-      </form>
+        </div>
 
-      <?php
-// Include config file
+      </form> 
 
-      require_once 'config.php';
-
-// Attempt select query execution
-      $sql = "SELECT * FROM recepie";
-      if($result = mysqli_query($link, $sql)){
-        if(mysqli_num_rows($result) > 0){
-          echo "<table class='table table-bordered table-striped'>";
-          echo "<thead>";
-          echo "<tr>";
-          echo "<th>Sr No</th>";
-          echo "<th> Recepie Name</th>";
-          echo "<th> Recepie Description</th>";
-          echo "<th> Recepie Type</th>";
-          echo "</tr>";
-          echo "</thead>";
-          echo "<tbody>";
-          while($row = mysqli_fetch_array($result)){
-            echo "<tr>";
-            echo "<td>" . $row['recepie_id'] . "</td>";
-            echo "<td>" . $row['recepie_name'] . "</td>";
-            echo "<td>" . $row['recepie_desc'] . "</td>";
-            echo "<td>" . $row['recepie_type'] . "</td>";
-            echo "</tr>";
-            }
-            echo "</tbody>";                            
-            echo "</table>";
-// Free result set
-            mysqli_free_result($result);
-          } else{
-            echo "<p class='lead'><em>No records were found.</em></p>";
-          }
-        } else{
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+      <?php 
+        while($row = mysqli_fetch_assoc($result)) { 
+        $new_title = $row["recepie_name"];
+        if(!empty($_POST["keyword"])) {
+          $new_title = highlightKeywords($row["recepie_name"],$_POST["keyword"]);
         }
+        $new_description = $row["recepie_desc"];
+        if(!empty($_POST["keyword"])) {
+          $new_description = highlightKeywords($row["recepie_desc"],$_POST["keyword"]);
+        }
+      ?>
 
-// Close connection
-        mysqli_close($link);
-        ?>
+      <h3> <?php echo $new_title; ?></h3>
+      <p><?php echo $new_description; ?></p>
+      
+      <?php } ?>
 
-
-      </main>
-
-
-      <?php include 'footer.php';?>
-
-
-    </div> <!-- /container -->
-  </body>
-  </html>
+    </main>
+    <?php include 'footer.php';?>
+  </div> <!-- /container -->
+</body>
+</html>

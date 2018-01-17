@@ -12,12 +12,27 @@
         echo "</li>";
         echo "<li class='nav-item'>";
         echo " <a class='nav-link' href='admin_reg.php'> ADMIN REG</a>";
-        echo "</li>";      
+        echo "</li>";    
+
+        
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='search.php'> SEARCH </a>";
+        echo "</li>";
+
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='about.php'> ABOUT US </a>";
+        echo "</li>";
+
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='help.php'> HELP </a>";
+        echo "</li>";  
+
 
       }
-      else{
+      elseif (isset($_SESSION['username'])) {
+  
 
-         echo "<li class='nav-item'>";
+        echo "<li class='nav-item'>";
         echo " <a class='nav-link' href='dashboard.php'> DASHBOARD </a>";
         echo "</li>";
 
@@ -26,20 +41,26 @@
         echo "</li>";
 
 
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='search.php'> SEARCH </a>";
+        echo "</li>";
+
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='about.php'> ABOUT US </a>";
+        echo "</li>";
+
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='help.php'> HELP </a>";
+        echo "</li>";
+
+
+
 
       }
 
-      echo "<li class='nav-item'>";
-      echo " <a class='nav-link' href='search.php'> SEARCH </a>";
-      echo "</li>";
 
-      echo "<li class='nav-item'>";
-      echo " <a class='nav-link' href='about.php'> ABOUT US </a>";
-      echo "</li>";
 
-      echo "<li class='nav-item'>";
-      echo " <a class='nav-link' href='help.php'> HELP </a>";
-      echo "</li>";
+      
 
       ?>
 
