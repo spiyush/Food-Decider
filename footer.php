@@ -1,3 +1,3 @@
 <footer class="footer">
-	<p>&copy; FOOD DECIDER 2018</p>
+	<marquee><p>&copy; FOOD DECIDER 2018</p></marquee>
 </footer>

@@ -1,4 +1,7 @@
 
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,16 +29,13 @@
 
       <div class="jumbotron">
         <h1 class="display-3"> Search  Recepie  </h1>
-        <h3> .</h3>
+        <h3> sddsa</h3>
       </div>
 
       <form >
 
         <label> Search Recepie</label>
         <input type="text" name="name" class="form-control" value="">
-
-        <br>   <br>   <br>
-
       </form>
 
       <?php
@@ -54,7 +54,6 @@
           echo "<th> Recepie Name</th>";
           echo "<th> Recepie Description</th>";
           echo "<th> Recepie Type</th>";
-
           echo "</tr>";
           echo "</thead>";
           echo "<tbody>";
@@ -64,11 +63,7 @@
             echo "<td>" . $row['recepie_name'] . "</td>";
             echo "<td>" . $row['recepie_desc'] . "</td>";
             echo "<td>" . $row['recepie_type'] . "</td>";
-
-          
-
-
-              echo "</tr>";
+            echo "</tr>";
             }
             echo "</tbody>";                            
             echo "</table>";

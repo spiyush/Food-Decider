@@ -1,31 +1,65 @@
 
 <header class="header clearfix">
   <nav>
-
     <ul class="nav nav-pills float-right">
 
+      <?php
 
-      <li class="nav-item">
-        <a class="nav-link" href="adminlogin.php"> ADMIN LOGIN</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="adminlogout.php"> ADMIN LOGOUT</a>
-      </li>
+// If session variable is not set it will redirect to login page
+      if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='adminlogin.php'> ADMIN LOGIN</a>";
+        echo "</li>";
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='admin_reg.php'> ADMIN REG</a>";
+        echo "</li>";      
 
-      <li class="nav-item">
-        <a class="nav-link" href="search.php">SEARCH </a>
-      </li>
+      }
+      else{
+
+         echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='dashboard.php'> DASHBOARD </a>";
+        echo "</li>";
+
+        echo "<li class='nav-item'>";
+        echo " <a class='nav-link' href='adminlogout.php'> ADMIN LOGOUT</a>";
+        echo "</li>";
 
 
-      <li class="nav-item">
-        <a class="nav-link" href="about.php">ABOUT US</a>
-      </li>
 
+      }
 
-      <li class="nav-item">
-        <a class="nav-link" href="help.php">HELP</a>
-      </li>
+      echo "<li class='nav-item'>";
+      echo " <a class='nav-link' href='search.php'> SEARCH </a>";
+      echo "</li>";
+
+      echo "<li class='nav-item'>";
+      echo " <a class='nav-link' href='about.php'> ABOUT US </a>";
+      echo "</li>";
+
+      echo "<li class='nav-item'>";
+      echo " <a class='nav-link' href='help.php'> HELP </a>";
+      echo "</li>";
+
+      ?>
+
     </ul>
   </nav>
-  <h3 class="text-muted"><a href="index.php">  Food Decider </a></h3>
+
+  <h3 class="text-muted"><?php
+
+// If session variable is not set it will redirect to login page
+  if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+    echo " <a  href='index.php'>  Food Decider</a>";    
+
+  }
+  else{
+    echo " <a  href='dashboard.php'>  Food Decider</a>";
+
+  }
+
+  ?>
+</h3>
+
+
 </header>

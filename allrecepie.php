@@ -1,4 +1,13 @@
+<?php
+// Initialize the session
+session_start();
 
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+    header("location: index.php");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,31 +17,31 @@
     <meta name="author" content="">
     <link rel="icon" href="http://localhost/food/img/favicon.ico">
 
-  <title> Food Decider</title>
+    <title> Food Decider</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="http://localhost/food/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="http://localhost/food/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="http://localhost/food/css/bootstrap.min.cssnarrow-jumbotron.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="http://localhost/food/css/bootstrap.min.cssnarrow-jumbotron.css" rel="stylesheet">
 </head>
 
 <body>
 
+    <div class="container">
+        <?php include 'header.php';?>
 
-    <?php include 'header.php';?>
+        <main role="main">
 
-    <div class="wrapper">
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Recepie  Details</h2>
-                        <a href="add_recepie.php" class="btn btn-success pull-right">Add New Recepie</a>
+                       
                     </div>
+                     <a href="add_recepie.php" class="btn btn-success pull-right">Add New Recepie</a>
                     <?php
 // Include config file
-
                     require_once 'config.php';
 
 // Attempt select query execution
@@ -78,13 +87,15 @@
                     mysqli_close($link);
                     ?>
                 </div>
-            </div>        
-        </div>
-    </div>
+            </div> 
 
-    <?php include 'footer.php';?>
+        </main>
 
 
-</div> <!-- /container -->
+        <?php include 'footer.php';?>
+
+
+    </div> <!-- /container -->
+
 </body>
 </html>

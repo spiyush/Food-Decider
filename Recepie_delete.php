@@ -1,4 +1,15 @@
 <?php
+
+// Initialize the session
+session_start();
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['username']) || empty($_SESSION['username'])){
+  header("location: index.php");
+  exit;
+}
+
+
 // Process delete operation after confirmation
 if(isset($_POST["recepie_id"]) && !empty($_POST["recepie_id"])){
 // Include config file
@@ -45,21 +56,13 @@ if(isset($_POST["recepie_id"]) && !empty($_POST["recepie_id"])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+
   <link rel="icon" href="http://localhost/food/img/favicon.ico">
 
-  <title> Delete Recepie | FOOD DECIDER</title>
+  <title> Delete Recepie | Food Decider</title>
 
   <!-- Bootstrap core CSS -->
   <link href="http://localhost/food/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-
-  <!-- Custom styles for this template -->
-  <link href="http://localhost/food/css/bootstrap.min.cssnarrow-jumbotron.css" rel="stylesheet">
-
-  <link href="http://localhost/food/css/bootstrap.min.css" rel="stylesheet">
-
 
   <!-- Custom styles for this template -->
   <link href="http://localhost/food/css/bootstrap.min.cssnarrow-jumbotron.css" rel="stylesheet">
@@ -70,25 +73,32 @@ if(isset($_POST["recepie_id"]) && !empty($_POST["recepie_id"])){
   <div class="container">
     <?php include 'header.php';?>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="page-header">
-          <h1>Delete Recepie</h1>
-        </div>
+    <main role="main">
+
+      <div class="row">
+        <div class="col-md-12">
 
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-          <div class="alert alert-danger fade in">
-            <input type="hidden" name="recepie_id" value="<?php echo trim($_GET["recepie_id"]); ?>"/>
-            <p>Are you sure you want to delete this record?</p><br>
-            <p>
-              <input type="submit" value="Yes" class="btn btn-danger">
-              <a href="allrecepie.php" class="btn btn-default">No</a>
-            </p>
+          <div class="card">
+            <div class="card-header">
+              Delete Recepie
+            </div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+              <div class="card-body">
+                <input type="hidden" name="recepie_id" value="<?php echo trim($_GET["recepie_id"]); ?>"/>
+                <h5 class="card-title">Delete Recepie  </h5>
+                <p class="card-text">Are you sure you want to delete this record?</p>
+                <input type="submit" value="Yes" class="btn btn-danger">
+                <a href="allrecepie.php" class="btn btn-default">No</a>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-    </div> 
+
+
+        </div>
+      </div> 
+
+    </main>
 
 
     <?php include 'footer.php';?>
